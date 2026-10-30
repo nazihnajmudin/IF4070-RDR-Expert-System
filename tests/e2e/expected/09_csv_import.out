@@ -1,0 +1,43 @@
+> new Sehat
+[info] New knowledge base with default conclusion 'Sehat'.
+> import-csv tests/e2e/fixtures/diagnosis.csv
+[warning] Imported 'diagnosis.csv': 11 rows: 1 already correct, 4 exceptions added, 1 revisions added, 0 conclusions edited, 0 rejected, 5 failed.
+  line 2: Added node #1 (demam AND suhu >= 38 >> Flu) as the true child of node #0.
+  line 3: Added node #2 (batuk AND sesak_napas >> Pneumonia) as the true child of node #1.
+  line 4: Added node #3 (ruam >> Campak) as the false child of node #2.
+  line 6: Added node #4 (batuk AND !demam >> Alergi) as the false child of node #1.
+  line 7: No clause distinguishes this case from the cornerstone of node #1. Added revision node #5 (T >> Demam Biasa) as the false child of node #3.
+  line 8: Clause 1: 'x >': missing value after '>'
+  line 9: Contradiction: 'a' and '!a' cannot both be true
+  line 10: expected 2 columns, found 1
+  line 11: the conclusion is empty
+  line 12: Clause 1: '"quoted"': a variable name must start with a letter or '_'
+> tree
+#0 (T >> Sehat)
+├─T─ #1 (demam AND suhu >= 38 >> Flu)
+│    ├─T─ #2 (batuk AND sesak_napas >> Pneumonia)
+│    │    ├─T─ ∅
+│    │    └─F─ #3 (ruam >> Campak)
+│    │         ├─T─ ∅
+│    │         └─F─ #5 (T >> Demam Biasa) [revises #1]
+│    │              ├─T─ ∅
+│    │              └─F─ ∅
+│    └─F─ #4 (batuk AND !demam >> Alergi)
+│         ├─T─ ∅
+│         └─F─ ∅
+└─F─ ∅
+> query demam; suhu = 39
+1. demam
+2. suhu = 39
+> start
+[info] Conclusion: Demam Biasa
+> query demam; suhu = 39; ruam
+1. demam
+2. suhu = 39
+3. ruam
+> start
+[info] Conclusion: Campak
+> import-csv tests/e2e/fixtures/no_header.csv
+[error] Cannot import the CSV: the first row must be the header 'case,conclusion'.
+> import-csv tests/e2e/fixtures/missing.csv
+[error] Cannot import the CSV: cannot open 'tests/e2e/fixtures/missing.csv': No such file or directory.

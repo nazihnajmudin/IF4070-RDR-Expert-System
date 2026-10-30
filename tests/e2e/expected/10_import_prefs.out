@@ -1,0 +1,35 @@
+> new Sumber
+[info] New knowledge base with default conclusion 'Sumber'.
+> pref ui_font_size 22
+[info] Preferences updated. Save the project to keep them.
+> pref ui_help_language en
+[info] Preferences updated. Save the project to keep them.
+> save build/e2e/tmp/prefs_source
+[info] Saved 'prefs_source.rdr.json'.
+> new Tujuan
+[info] New knowledge base with default conclusion 'Tujuan'.
+> pref ui_font_size 14
+[info] Preferences updated. Save the project to keep them.
+> pref ui_help_language id
+[info] Preferences updated. Save the project to keep them.
+> status
+RDR Expert System - Untitled* | 1 nodes
+[info] Preferences updated. Save the project to keep them.
+> import-prefs build/e2e/tmp/prefs_source.rdr.json
+[info] Imported preferences from 'prefs_source.rdr.json': 2 value(s) changed. Save the project to keep them.
+> pref
+tree_show_empty_slots            true
+tree_show_node_id                true
+tree_show_cornerstone            false
+tree_highlight                   true
+result_show_rule                 true
+acquisition_clause_selection     editable
+acquisition_revision_strategy    revision_node
+ui_font_size                     22
+ui_theme                         light
+ui_help_language                 en
+> status
+RDR Expert System - Untitled* | 1 nodes
+[info] Imported preferences from 'prefs_source.rdr.json': 2 value(s) changed. Save the project to keep them.
+> import-prefs tests/e2e/fixtures/not_a_project.json
+[error] Cannot import preferences: not an RDR project file ("format" must be "rdr-kb").

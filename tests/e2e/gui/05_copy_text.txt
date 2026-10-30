@@ -1,0 +1,27 @@
+# G05 Result and Tree text can be selected and copied
+size 1200 760
+action open examples/diagnosis.rdr.json
+wait 3
+alt t
+wait 2
+expect result_tab tree
+key selectall
+key copy
+wait 2
+expect clipboard #0 (T >> Sehat)
+expect clipboard ├─T─ #1 (demam AND suhu >= 38 >> Flu)
+alt r
+wait 2
+key selectall
+key copy
+wait 2
+expect clipboard Pneumonia     #2  batuk AND sesak_napas
+press 586 185
+move 640 185
+wait 2
+release 640 185
+wait 2
+key copy
+wait 2
+expect clipboard Flu
+shot selection

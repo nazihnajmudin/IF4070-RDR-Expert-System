@@ -1,0 +1,14 @@
+# E14 Large generated dataset (2000 rows) builds and reloads a deep tree
+new Kelas0
+import-csv build/e2e/tmp/large.csv
+save build/e2e/tmp/large
+open build/e2e/tmp/large.rdr.json
+query f1999
+start
+query f1999; g9
+start
+query f7; g7
+start
+query f10; g0
+start
+validate

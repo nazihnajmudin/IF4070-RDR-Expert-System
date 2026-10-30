@@ -1,0 +1,31 @@
+# G06 Saving and opening restores knowledge, query draft, result, tab, and split
+size 1200 760
+action open examples/diagnosis.rdr.json
+action tab tree
+action add pusing
+press 460 400
+move 1150 400
+wait 2
+release 1150 400
+wait 2
+expect split 0.85
+action save build/e2e/tmp/gui_session.rdr.json
+expect status Saved
+action new Lain
+expect nodes 1
+expect split 0.85
+action open build/e2e/tmp/gui_session.rdr.json
+wait 3
+expect nodes 10
+expect result_tab tree
+expect draft demam; suhu = 39; batuk; sesak_napas; pusing
+expect conclusion Pneumonia
+expect split 0.85
+expect undo 0
+press 916 400
+move 0 400
+wait 2
+release 0 400
+wait 2
+expect split 0.15
+shot reopened

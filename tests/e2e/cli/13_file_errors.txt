@@ -1,0 +1,8 @@
+# E13 File errors keep the current project unchanged
+new Tetap
+open build/e2e/tmp/does_not_exist.rdr.json
+open tests/e2e/fixtures/malformed.rdr.json
+open tests/e2e/fixtures/not_a_project.json
+open tests/e2e/fixtures/bad_clause.rdr.json
+status
+save

@@ -1,0 +1,21 @@
+# E11 Undo and redo across query, knowledge, and preference changes
+new Sehat
+undo
+add demam
+add batuk
+query demam
+start
+correct Flu
+pref ui_theme dark
+undo
+pref
+undo
+tree
+result
+redo
+tree
+add pusing
+redo
+undo
+undo
+draft

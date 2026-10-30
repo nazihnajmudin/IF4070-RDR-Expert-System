@@ -1,0 +1,25 @@
+> new Sehat
+[info] New knowledge base with default conclusion 'Sehat'.
+> start
+[info] Conclusion: Sehat
+> result
+Final conclusion: Sehat
+  * Sehat   (#0: T)
+> query demam
+1. demam
+> start
+[info] Conclusion: Sehat
+> result
+Final conclusion: Sehat
+  * Sehat   (#0: T)
+> draft
+1. demam
+> remove 1
+(empty query)
+> draft
+(empty query)
+> start
+[info] Conclusion: Sehat
+> status
+RDR Expert System - Untitled | 1 nodes
+[info] Conclusion: Sehat

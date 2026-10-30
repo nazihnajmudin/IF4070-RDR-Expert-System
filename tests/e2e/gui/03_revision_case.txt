@@ -1,0 +1,17 @@
+# G03 Revision case through the correction dialog adds a T rule node
+size 1200 760
+action new Miskin
+action add uang > 100
+action start
+action correct Butuh Duit
+key enter
+wait 3
+expect nodes 2
+action correct Kaya Raya
+wait 4
+shot revision_dialog
+key enter
+wait 4
+expect nodes 3
+expect conclusion Kaya Raya
+expect status Added revision node #2

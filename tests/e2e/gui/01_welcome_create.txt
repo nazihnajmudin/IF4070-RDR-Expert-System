@@ -1,0 +1,12 @@
+# G01 Startup shows the welcome dialog, typing a default conclusion creates the knowledge base
+size 1200 760
+wait 5
+expect dialog welcome
+expect nodes 1
+type Sehat
+key enter
+wait 4
+expect dialog none
+expect default Sehat
+expect dirty 0
+shot created

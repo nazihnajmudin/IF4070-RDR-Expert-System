@@ -1,0 +1,26 @@
+# G08 Preference changes apply immediately and are undoable, CSV import shows a report
+size 1200 760
+action new Sehat
+action prefs
+wait 3
+expect dialog prefs
+shortcut escape
+wait 2
+action pref ui_theme dark
+action pref ui_font_size 20
+wait 3
+expect theme dark
+expect font 20
+shot dark_large
+shortcut undo
+wait 3
+expect font 16
+shortcut undo
+wait 3
+expect theme light
+action csv tests/e2e/fixtures/diagnosis.csv
+wait 3
+expect dialog csv
+expect nodes 6
+expect status 5 failed
+shot csv_report

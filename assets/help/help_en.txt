@@ -1,0 +1,104 @@
+# RDR Expert System
+
+An expert system based on binary Single Classification Ripple Down Rules (SCRDR). Knowledge is a tree of rules that grows every time an expert corrects a wrong conclusion.
+
+# Basic Concepts
+
+## Nodes and rules
+Every node has the form (clauses >> conclusion). The clauses of a node are joined with AND. An empty rule is written T and is always true.
+
+## True and false edges
+Every node has exactly two child slots. The T (true) slot holds an exception that is checked when the node rule is true. The F (false) slot holds an alternative that is checked when the node rule is false. In the Tree tab the T child is always drawn above the F child, and empty slots are marked with the empty set symbol.
+
+## Root
+The root is always T >> <default>. The default conclusion is the only domain specific setting, for example Sehat for a diagnosis system or 0% for a tax system.
+
+## Cornerstone case
+Every node stores the query that caused it to be created. That query is the reference when the knowledge is corrected.
+
+# Writing Clauses
+
+## Boolean
+Written as a variable name, for example demam. Negation is written !demam. The clause !demam is only true when the query states the fact !demam explicitly (Open World Assumption).
+
+## Literal
+Written var = value or var != value, for example demam = tinggi. The value is a single word without spaces (use an underscore, for example jakarta_selatan). Comparison is case sensitive.
+
+## Numeric
+Written var op number where op is one of = != > < >= <=, for example suhu >= 38.5. Several numeric facts for the same variable are intersected. A numeric rule is true when every value allowed by the facts satisfies the rule.
+
+## General rules
+A variable name starts with a letter or an underscore, followed by letters, digits, or underscores. The word T cannot be a variable name. Clauses of different kinds are never compared even when they share a variable name.
+
+# Running a Query
+
+1. Type clauses in the Q bar at the bottom, separate them with semicolons, and press Enter. Example: demam; suhu >= 38.5; batuk
+2. The clauses appear in the Clause tab. Each clause can be edited in place or removed with the x button. Invalid clauses are shown in red.
+3. The Query tab shows the whole query as free text, one clause per line.
+4. Press Start (or F5) to run the reasoning. Clear empties the query and the result.
+
+# Reading the Result
+
+## Result tab
+The top line with the check mark is the final conclusion. Below it a table lists every conclusion of the nodes that fired, newest first down to the default conclusion, together with the id and rule that produced it.
+
+## Tree tab
+Shows the whole tree. After reasoning the final conclusion node is bold with a background, fired nodes are green, and nodes that were evaluated but false are orange. Double click a node to open it in Manual Edit.
+
+## Copying text
+The content of the Result and Tree tabs can be selected by dragging the mouse or with Shift+click. Ctrl+A selects everything and Ctrl+C copies it as text.
+
+# Correcting a Conclusion
+
+Choose Edit > Edit last query and type the correct conclusion.
+
+## Exception
+The application collects the query clauses that the cornerstone case of the concluding node does not satisfy. Those clauses become the rule of a new exception node. In editable mode clauses can be unticked or generalised (for example suhu = 37 into suhu < 38) as long as the rule stays true for this query and false for the cornerstone case.
+
+## Revision case
+When no clause tells the two cases apart, the revision strategy from the preferences is used. The default strategy adds a node T >> <new conclusion> at the end of the evaluation path, so the old conclusion is revised under the same rule. The other strategies edit the node conclusion directly (not RDR compliant) or reject the correction.
+
+# Managing Knowledge
+
+## Files
+File > New creates a new knowledge base. Open and Save use *.rdr.json project files that hold the tree, the preferences, and the last session. When a project is opened its last query and result are shown again.
+
+## Insert CSV
+Edit > Insert CSV builds knowledge from a dataset. The first row must be the header case,conclusion. The case column holds clauses separated by semicolons, for example "demam; suhu = 39",Flu. Every row is processed in order like a normal correction and the outcome is reported per row.
+
+## Manual Edit
+Edit > Manual Edit changes the tree directly: edit rules, conclusions, and cornerstones, add a child to an empty slot, and delete subtrees. Use Validate Knowledge Base afterwards to check that every cornerstone still yields the conclusion of its node.
+
+## Undo and Redo
+The Undo and Redo buttons below Start and Clear (or Ctrl+Z and Ctrl+Y while not typing) undo and redo changes to the query, the knowledge, and the preferences. The history is cleared on New or Open.
+
+# Appearance
+
+## Panel width
+Drag the gap between the left panel and the middle buttons, or between the middle buttons and the right panel, to change the width ratio of the two panels.
+
+## Preferences
+Preference > Edit Preference controls the tree view, the result view, the exception clause mode, the revision strategy, the font size, the theme, and the language of this Help page. Preference > Import Preference copies the preferences of another project. Preference changes are written to the file when the project is saved.
+
+# Keyboard
+
+## Shortcuts
+Ctrl+N  New
+Ctrl+O  Open
+Ctrl+S  Save
+Ctrl+Shift+S  Save As
+Ctrl+Z and Ctrl+Y  Undo and Redo
+F5  Start
+F1  Help
+Esc  Close a dialog or menu
+
+## Alt navigation
+Hold Alt to see the underlined letters.
+Alt+F, Alt+E, Alt+P, Alt+H  Open the File, Edit, Preference, Help menu. Use the arrow keys to choose and Enter to run.
+Alt+Q  Q bar
+Alt+C  Clause tab
+Alt+Y  Query tab
+Alt+R  Result tab
+Alt+T  Tree tab
+Alt+S and Alt+L  Start and Clear
+Alt+U and Alt+O  Undo and Redo

@@ -1,0 +1,12 @@
+# Build output
+build/
+*.o
+*.d
+*.a
+*.exe
+
+# Editor and OS files
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

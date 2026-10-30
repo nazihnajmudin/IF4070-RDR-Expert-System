@@ -1,0 +1,104 @@
+# RDR Expert System
+
+Aplikasi expert system berbasis binary Single Classification Ripple Down Rules (SCRDR). Knowledge disusun sebagai pohon rule yang terus bertambah setiap kali pakar mengoreksi kesimpulan yang salah.
+
+# Konsep Dasar
+
+## Node dan rule
+Setiap node berbentuk (klausa >> kesimpulan). Klausa-klausa dalam satu node digabung dengan AND. Rule kosong ditulis T dan selalu bernilai benar.
+
+## Edge true dan false
+Setiap node punya tepat dua slot anak. Slot T (true) berisi exception yang dicek jika rule node bernilai benar. Slot F (false) berisi alternatif yang dicek jika rule node bernilai salah. Pada tab Tree, anak T selalu digambar di atas anak F, dan slot kosong ditandai simbol kosong.
+
+## Root
+Root selalu berbentuk T >> <default>. Kesimpulan default adalah satu-satunya pengaturan yang berbeda antar domain, misalnya Sehat untuk diagnosis atau 0% untuk pajak.
+
+## Cornerstone case
+Setiap node menyimpan kueri yang menyebabkan node tersebut dibuat. Kueri ini dipakai sebagai pembanding saat knowledge dikoreksi.
+
+# Menulis Klausa
+
+## Boolean
+Ditulis sebagai nama variabel, misalnya demam. Negasi ditulis !demam. Klausa !demam hanya benar jika kueri memuat fakta !demam secara eksplisit (Open World Assumption).
+
+## Literal
+Ditulis var = nilai atau var != nilai, misalnya demam = tinggi. Nilai berupa satu kata tanpa spasi (gunakan garis bawah, misalnya jakarta_selatan). Perbandingan membedakan huruf besar dan kecil.
+
+## Numerik
+Ditulis var op bilangan dengan op salah satu dari = != > < >= <=, misalnya suhu >= 38.5. Beberapa fakta numerik untuk variabel yang sama diiriskan. Rule numerik benar jika seluruh nilai yang mungkin menurut fakta memenuhi rule tersebut.
+
+## Aturan umum
+Nama variabel diawali huruf atau garis bawah, lalu huruf, angka, atau garis bawah. Kata T tidak boleh dipakai sebagai nama variabel. Klausa dengan jenis berbeda tidak pernah dibandingkan walaupun nama variabelnya sama.
+
+# Menjalankan Kueri
+
+1. Ketik klausa pada bar Q di bagian bawah, pisahkan dengan titik koma, lalu tekan Enter. Contoh: demam; suhu >= 38.5; batuk
+2. Klausa tampil di tab Clause. Setiap klausa dapat diedit langsung atau dihapus dengan tombol x. Klausa yang tidak valid berwarna merah.
+3. Tab Query menampilkan seluruh kueri sebagai teks bebas, satu klausa per baris.
+4. Tekan Start (atau F5) untuk menjalankan reasoning. Clear mengosongkan kueri dan hasil.
+
+# Membaca Hasil
+
+## Tab Result
+Baris paling atas bertanda centang adalah kesimpulan akhir. Di bawahnya tampil tabel berisi seluruh kesimpulan dari node yang menyala, dari yang terbaru di atas sampai kesimpulan default di bawah, beserta id dan rule penghasilnya.
+
+## Tab Tree
+Menampilkan seluruh pohon. Setelah reasoning, node kesimpulan akhir ditebalkan dan diberi latar, node yang menyala berwarna hijau, dan node yang dievaluasi tetapi salah berwarna oranye. Double click sebuah node untuk membukanya di Manual Edit.
+
+## Menyalin teks
+Isi tab Result dan Tree dapat diseleksi dengan drag mouse atau Shift+klik. Ctrl+A menyeleksi seluruh isi dan Ctrl+C menyalinnya sebagai teks.
+
+# Mengoreksi Kesimpulan
+
+Pilih Edit > Edit last query, lalu ketik kesimpulan yang benar.
+
+## Exception
+Aplikasi menghitung klausa kueri yang tidak dipenuhi cornerstone case milik node kesimpulan. Klausa tersebut menjadi rule node exception baru. Pada mode editable, klausa dapat dihapus centangnya atau digeneralisasi (misalnya suhu = 37 menjadi suhu < 38) selama rule tetap benar untuk kueri ini dan salah untuk cornerstone case.
+
+## Kasus revisi
+Jika tidak ada klausa pembeda, dipakai strategi revisi dari preferensi. Strategi default menambahkan node T >> <kesimpulan baru> di ujung penelusuran sehingga kesimpulan lama direvisi dengan rule yang sama. Strategi lain adalah mengubah langsung kesimpulan node (tidak sesuai prinsip RDR) atau menolak koreksi.
+
+# Mengelola Knowledge
+
+## File
+File > New membuat knowledge base baru. Open dan Save memakai file project *.rdr.json yang berisi tree, preferensi, dan kondisi sesi terakhir. Saat project dibuka, kueri dan hasil terakhir ditampilkan kembali.
+
+## Insert CSV
+Edit > Insert CSV membangun knowledge dari dataset. Baris pertama wajib berupa header case,conclusion. Kolom case berisi klausa yang dipisah titik koma, misalnya "demam; suhu = 39",Flu. Setiap baris diproses berurutan seperti koreksi biasa dan hasilnya dilaporkan per baris.
+
+## Manual Edit
+Edit > Manual Edit mengubah tree secara langsung: mengedit rule, kesimpulan, dan cornerstone, menambah anak pada slot kosong, serta menghapus subtree. Gunakan Validate Knowledge Base setelahnya untuk memeriksa bahwa setiap cornerstone masih menghasilkan kesimpulan node pemiliknya.
+
+## Undo dan Redo
+Tombol Undo dan Redo di bawah Start dan Clear (atau Ctrl+Z dan Ctrl+Y saat tidak sedang mengetik) membatalkan dan mengulang perubahan kueri, knowledge, dan preferensi. Riwayat dikosongkan saat New atau Open.
+
+# Tampilan
+
+## Lebar panel
+Geser celah di antara panel kiri dan tombol tengah, atau di antara tombol tengah dan panel kanan, untuk mengubah proporsi lebar kedua panel.
+
+## Preferensi
+Preference > Edit Preference mengatur tampilan tree, tampilan hasil, mode klausa exception, strategi revisi, ukuran font, tema, dan bahasa halaman Help. Preference > Import Preference menyalin preferensi dari project lain. Perubahan preferensi baru tersimpan ke file saat project disimpan.
+
+# Keyboard
+
+## Shortcut
+Ctrl+N  New
+Ctrl+O  Open
+Ctrl+S  Save
+Ctrl+Shift+S  Save As
+Ctrl+Z dan Ctrl+Y  Undo dan Redo
+F5  Start
+F1  Help
+Esc  Menutup dialog atau menu
+
+## Navigasi dengan Alt
+Tahan Alt untuk melihat huruf yang digaris bawahi.
+Alt+F, Alt+E, Alt+P, Alt+H  Membuka menu File, Edit, Preference, Help. Gunakan panah untuk memilih dan Enter untuk menjalankan.
+Alt+Q  Bar Q
+Alt+C  Tab Clause
+Alt+Y  Tab Query
+Alt+R  Tab Result
+Alt+T  Tab Tree
+Alt+S dan Alt+L  Start dan Clear
+Alt+U dan Alt+O  Undo dan Redo

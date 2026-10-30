@@ -1,0 +1,13 @@
+# E10 Import preferences from another project without touching its knowledge
+new Sumber
+pref ui_font_size 22
+pref ui_help_language en
+save build/e2e/tmp/prefs_source
+new Tujuan
+pref ui_font_size 14
+pref ui_help_language id
+status
+import-prefs build/e2e/tmp/prefs_source.rdr.json
+pref
+status
+import-prefs tests/e2e/fixtures/not_a_project.json

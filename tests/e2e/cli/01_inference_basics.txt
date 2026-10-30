@@ -1,0 +1,12 @@
+# E01 Inference basics: default conclusion, empty query, trace order
+new Sehat
+start
+result
+query demam
+start
+result
+draft
+remove 1
+draft
+start
+status

@@ -1,0 +1,57 @@
+> new Sehat
+[info] New knowledge base with default conclusion 'Sehat'.
+> query demam; suhu >; T; 1abc; x = a b; warna > merah; !x = 3
+1. demam
+2. suhu >   <- invalid: 'suhu >': missing value after '>'
+3. T   <- invalid: 'T' is reserved for an always-true rule and cannot be used as a clause
+4. 1abc   <- invalid: '1abc': a variable name must start with a letter or '_'
+5. x = a b   <- invalid: 'x = a b': a value must be a single word without spaces (use '_' instead)
+6. warna > merah   <- invalid: 'warna > merah': operator '>' requires a numeric value
+7. !x = 3   <- invalid: '!x = 3': '!' can only negate a boolean variable, use '!=' instead
+> draft
+1. demam
+2. suhu >   <- invalid: 'suhu >': missing value after '>'
+3. T   <- invalid: 'T' is reserved for an always-true rule and cannot be used as a clause
+4. 1abc   <- invalid: '1abc': a variable name must start with a letter or '_'
+5. x = a b   <- invalid: 'x = a b': a value must be a single word without spaces (use '_' instead)
+6. warna > merah   <- invalid: 'warna > merah': operator '>' requires a numeric value
+7. !x = 3   <- invalid: '!x = 3': '!' can only negate a boolean variable, use '!=' instead
+> start
+[error] The query has 6 invalid clause(s).
+  - Clause 2: 'suhu >': missing value after '>'
+  - Clause 3: 'T' is reserved for an always-true rule and cannot be used as a clause
+  - Clause 4: '1abc': a variable name must start with a letter or '_'
+  - Clause 5: 'x = a b': a value must be a single word without spaces (use '_' instead)
+  - Clause 6: 'warna > merah': operator '>' requires a numeric value
+  - Clause 7: '!x = 3': '!' can only negate a boolean variable, use '!=' instead
+> query demam; !demam
+1. demam
+2. !demam
+> start
+[error] The query contains contradicting facts.
+  - Contradiction: 'demam' and '!demam' cannot both be true
+> query warna = merah; warna = biru
+1. warna = merah
+2. warna = biru
+> start
+[error] The query contains contradicting facts.
+  - Contradiction: 'warna' cannot equal both 'merah' and 'biru'
+> query x > 5; x < 3
+1. x > 5
+2. x < 3
+> start
+[error] The query contains contradicting facts.
+  - Contradiction: no value of 'x' satisfies all numeric facts (conflict at 'x < 3')
+> query warna = merah; warna != merah
+1. warna = merah
+2. warna != merah
+> start
+[error] The query contains contradicting facts.
+  - Contradiction: 'warna = merah' and 'warna != merah'
+> correct Flu
+[error] There is no result to correct. Run a query first.
+> new
+[error] The default conclusion cannot be empty.
+> status
+RDR Expert System - Untitled | 1 nodes
+[error] The default conclusion cannot be empty.

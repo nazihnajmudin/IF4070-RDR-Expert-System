@@ -1,0 +1,55 @@
+> new Normal
+[info] New knowledge base with default conclusion 'Normal'.
+> query suhu = 39
+1. suhu = 39
+> start
+[info] Conclusion: Normal
+> correct Demam
+[info] Added node #1 (suhu = 39 >> Demam) as the true child of node #0.
+> query suhu = 37.5; lemas
+1. suhu = 37.5
+2. lemas
+> start
+[info] Conclusion: Normal
+> plan
+Current conclusion: Normal (node #0)
+Last evaluated node: #1, new node goes to its false slot
+Difference list: suhu = 37.5; lemas
+> correct Subfebris | suhu > 40
+[error] Invalid exception rule: the rule must be satisfied by the current query.
+> correct Subfebris | lemas; suhu = 39
+[error] Invalid exception rule: the rule must be satisfied by the current query.
+> correct Subfebris | suhu > 37; suhu < 38
+[info] Added node #2 (suhu > 37 AND suhu < 38 >> Subfebris) as the false child of node #1.
+> tree
+#0 (T >> Normal)   [fired]
+├─T─ #1 (suhu = 39 >> Demam)   [failed]
+│    ├─T─ ∅
+│    └─F─ #2 (suhu > 37 AND suhu < 38 >> Subfebris)   <== conclusion
+│         ├─T─ ∅
+│         └─F─ ∅
+└─F─ ∅
+> query suhu = 37.2
+1. suhu = 37.2
+> start
+[info] Conclusion: Subfebris
+> pref acquisition_clause_selection strict
+[info] Preferences updated. Save the project to keep them.
+> query suhu = 37.5; lemas; pucat
+1. suhu = 37.5
+2. lemas
+3. pucat
+> start
+[info] Conclusion: Subfebris
+> correct Anemia | pucat; suhu < 38
+[info] Added node #3 (pucat >> Anemia) as the true child of node #2.
+> tree
+#0 (T >> Normal)   [fired]
+├─T─ #1 (suhu = 39 >> Demam)   [failed]
+│    ├─T─ ∅
+│    └─F─ #2 (suhu > 37 AND suhu < 38 >> Subfebris)   [fired]
+│         ├─T─ #3 (pucat >> Anemia)   <== conclusion
+│         │    ├─T─ ∅
+│         │    └─F─ ∅
+│         └─F─ ∅
+└─F─ ∅

@@ -1,0 +1,80 @@
+> new Normal
+[info] New knowledge base with default conclusion 'Normal'.
+> add-child 0 true demam | Demam
+[info] Added node #1 as the true child of node #0.
+> add-child 1 true !batuk | Demam Tanpa Batuk
+[info] Added node #2 as the true child of node #1.
+> add-child 1 false suhu >= 38.5 | Panas
+[info] Added node #3 as the false child of node #1.
+> add-child 3 false suhu > 37; suhu < 39 | Hangat
+[info] Added node #4 as the false child of node #3.
+> add-child 4 false warna != merah | Bukan Merah
+[info] Added node #5 as the false child of node #4.
+> add-child 5 false suhu = tinggi | Suhu Literal
+[info] Added node #6 as the false child of node #5.
+> tree
+#0 (T >> Normal)
+├─T─ #1 (demam >> Demam)
+│    ├─T─ #2 (!batuk >> Demam Tanpa Batuk)
+│    │    ├─T─ ∅
+│    │    └─F─ ∅
+│    └─F─ #3 (suhu >= 38.5 >> Panas)
+│         ├─T─ ∅
+│         └─F─ #4 (suhu > 37 AND suhu < 39 >> Hangat)
+│              ├─T─ ∅
+│              └─F─ #5 (warna != merah >> Bukan Merah)
+│                   ├─T─ ∅
+│                   └─F─ #6 (suhu = tinggi >> Suhu Literal)
+│                        ├─T─ ∅
+│                        └─F─ ∅
+└─F─ ∅
+> query demam
+1. demam
+> start
+[info] Conclusion: Demam
+> query demam; !batuk
+1. demam
+2. !batuk
+> start
+[info] Conclusion: Demam Tanpa Batuk
+> query suhu = 38.7
+1. suhu = 38.7
+> start
+[info] Conclusion: Panas
+> query suhu > 38.5
+1. suhu > 38.5
+> start
+[info] Conclusion: Panas
+> query suhu > 38.6; suhu < 38.9
+1. suhu > 38.6
+2. suhu < 38.9
+> start
+[info] Conclusion: Panas
+> query suhu = 38
+1. suhu = 38
+> start
+[info] Conclusion: Hangat
+> query suhu <= 40
+1. suhu <= 40
+> start
+[info] Conclusion: Normal
+> query warna = biru
+1. warna = biru
+> start
+[info] Conclusion: Bukan Merah
+> query warna = merah
+1. warna = merah
+> start
+[info] Conclusion: Normal
+> query warna != merah
+1. warna != merah
+> start
+[info] Conclusion: Bukan Merah
+> query suhu = tinggi
+1. suhu = tinggi
+> start
+[info] Conclusion: Suhu Literal
+> query demam = ya
+1. demam = ya
+> start
+[info] Conclusion: Normal

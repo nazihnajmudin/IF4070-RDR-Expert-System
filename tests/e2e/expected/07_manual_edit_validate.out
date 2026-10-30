@@ -1,0 +1,56 @@
+> new Sehat
+[info] New knowledge base with default conclusion 'Sehat'.
+> query demam
+1. demam
+> start
+[info] Conclusion: Sehat
+> correct Flu
+[info] Added node #1 (demam >> Flu) as the true child of node #0.
+> query demam; batuk
+1. demam
+2. batuk
+> start
+[info] Conclusion: Flu
+> correct Bronkitis
+[info] Added node #2 (batuk >> Bronkitis) as the true child of node #1.
+> validate
+[info] Validation passed for 2 node(s) with 0 note(s).
+> rule 0 demam
+[error] Cannot update node #0: the root rule is always T and cannot be changed.
+> rule 2 x >
+[error] Cannot update node #2: Clause 1: 'x >': missing value after '>'.
+> rule 2 T; batuk
+[error] Cannot update node #2: 'T' means an always-true rule and cannot be combined with other clauses.
+> conclusion 2
+[error] Cannot update node #2: conclusion cannot be empty.
+> cornerstone 0 demam
+[error] Cannot update node #0: the root cornerstone is always empty.
+> cornerstone 2 a; !a
+[error] Cannot update node #2: Contradiction: 'a' and '!a' cannot both be true.
+> add-child 0 false demam | X
+[error] Cannot add a child to node #0: the false slot of the root is never evaluated because the root is always true.
+> add-child 0 true demam | X
+[error] Cannot add a child to node #0: the true slot of node #0 is already occupied.
+> add-child 2 false sesak | Asma | demam; sesak
+[info] Added node #3 as the false child of node #2.
+> add-child 99 true a | b
+[error] Cannot add a child to node #99: node #99 does not exist.
+> rule 2 tidak_ada
+[info] Updated the rule of node #2.
+> validate
+[warning] Validation found 1 problem(s) in 3 node(s).
+  - The cornerstone of node #2 now concludes 'Flu' at node #1 instead of 'Bronkitis'.
+> delete 0
+[error] Cannot delete node #0: the root node cannot be deleted.
+> delete 1
+[info] Deleted node #1 and 2 descendant(s).
+> tree
+#0 (T >> Sehat)   <== conclusion
+├─T─ ∅
+└─F─ ∅
+> add-child 0 true T | Selalu
+[info] Added node #4 as the true child of node #0.
+> query apa
+1. apa
+> start
+[info] Conclusion: Selalu

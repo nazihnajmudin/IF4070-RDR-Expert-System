@@ -1,0 +1,99 @@
+{
+  "format": "rdr-kb",
+  "version": 1,
+  "next_id": 10,
+  "root": {
+    "id": 0,
+    "rule": [],
+    "conclusion": "Sehat",
+    "cornerstone": [],
+    "true": {
+      "id": 1,
+      "rule": ["demam", "suhu >= 38"],
+      "conclusion": "Flu",
+      "cornerstone": ["demam", "suhu >= 38"],
+      "true": {
+        "id": 2,
+        "rule": ["batuk", "sesak_napas"],
+        "conclusion": "Pneumonia",
+        "cornerstone": ["demam", "suhu >= 38", "batuk", "sesak_napas"],
+        "true": null,
+        "false": {
+          "id": 3,
+          "rule": ["ruam"],
+          "conclusion": "Campak",
+          "cornerstone": ["demam", "suhu >= 38", "ruam"],
+          "true": {
+            "id": 4,
+            "rule": ["nyeri_sendi"],
+            "conclusion": "Demam Berdarah",
+            "cornerstone": ["demam", "suhu >= 38", "ruam", "nyeri_sendi"],
+            "true": null,
+            "false": null
+          },
+          "false": null
+        }
+      },
+      "false": {
+        "id": 5,
+        "rule": ["batuk", "!demam"],
+        "conclusion": "Alergi",
+        "cornerstone": ["batuk", "!demam"],
+        "true": {
+          "id": 6,
+          "rule": ["bersin", "mata_gatal"],
+          "conclusion": "Rinitis Alergi",
+          "cornerstone": ["batuk", "!demam", "bersin", "mata_gatal"],
+          "true": null,
+          "false": null
+        },
+        "false": {
+          "id": 7,
+          "rule": ["sakit_kepala", "tekanan_darah >= 140"],
+          "conclusion": "Hipertensi",
+          "cornerstone": ["sakit_kepala", "tekanan_darah >= 140"],
+          "true": {
+            "id": 8,
+            "rule": ["pusing = berat"],
+            "conclusion": "Hipertensi Berat",
+            "cornerstone": ["sakit_kepala", "tekanan_darah >= 140", "pusing = berat"],
+            "true": null,
+            "false": null
+          },
+          "false": {
+            "id": 9,
+            "rule": ["demam", "suhu < 38"],
+            "conclusion": "Demam Ringan",
+            "cornerstone": ["demam", "suhu < 38"],
+            "true": null,
+            "false": null
+          }
+        }
+      }
+    },
+    "false": null
+  },
+  "preferences": {
+    "tree_show_empty_slots": true,
+    "tree_show_node_id": true,
+    "tree_show_cornerstone": false,
+    "tree_highlight": true,
+    "result_show_rule": true,
+    "acquisition_clause_selection": "editable",
+    "acquisition_revision_strategy": "revision_node",
+    "ui_font_size": 16,
+    "ui_theme": "light",
+    "ui_help_language": "id"
+  },
+  "session": {
+    "query_draft": ["demam", "suhu = 39", "batuk", "sesak_napas"],
+    "last_query": ["demam", "suhu = 39", "batuk", "sesak_napas"],
+    "last_evaluated": 2,
+    "last_concluded": 2,
+    "view": {
+      "query_tab": "clause",
+      "result_tab": "result",
+      "split": 0.42
+    }
+  }
+}

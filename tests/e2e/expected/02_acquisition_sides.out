@@ -1,0 +1,71 @@
+> new Sehat
+[info] New knowledge base with default conclusion 'Sehat'.
+> query demam
+1. demam
+> start
+[info] Conclusion: Sehat
+> correct Flu
+[info] Added node #1 (demam >> Flu) as the true child of node #0.
+> query demam; batuk
+1. demam
+2. batuk
+> start
+[info] Conclusion: Flu
+> plan
+Current conclusion: Flu (node #1)
+Last evaluated node: #1, new node goes to its true slot
+Difference list: batuk
+> correct Bronkitis
+[info] Added node #2 (batuk >> Bronkitis) as the true child of node #1.
+> query demam; ruam
+1. demam
+2. ruam
+> start
+[info] Conclusion: Flu
+> plan
+Current conclusion: Flu (node #1)
+Last evaluated node: #2, new node goes to its false slot
+Difference list: ruam
+> correct Campak
+[info] Added node #3 (ruam >> Campak) as the false child of node #2.
+> query batuk
+1. batuk
+> start
+[info] Conclusion: Sehat
+> plan
+Current conclusion: Sehat (node #0)
+Last evaluated node: #1, new node goes to its false slot
+Difference list: batuk
+> correct Alergi
+[info] Added node #4 (batuk >> Alergi) as the false child of node #1.
+> tree
+#0 (T >> Sehat)   [fired]
+├─T─ #1 (demam >> Flu)   [failed]
+│    ├─T─ #2 (batuk >> Bronkitis)
+│    │    ├─T─ ∅
+│    │    └─F─ #3 (ruam >> Campak)
+│    │         ├─T─ ∅
+│    │         └─F─ ∅
+│    └─F─ #4 (batuk >> Alergi)   <== conclusion
+│         ├─T─ ∅
+│         └─F─ ∅
+└─F─ ∅
+> query demam; ruam
+1. demam
+2. ruam
+> start
+[info] Conclusion: Campak
+> result
+Final conclusion: Campak
+  * Campak   (#3: ruam)
+    Flu   (#1: demam)
+    Sehat   (#0: T)
+> query batuk; pilek
+1. batuk
+2. pilek
+> start
+[info] Conclusion: Alergi
+> result
+Final conclusion: Alergi
+  * Alergi   (#4: batuk)
+    Sehat   (#0: T)

@@ -1,0 +1,33 @@
+# G02 Q bar input, Start button, correction dialog, Undo and Redo buttons
+size 1200 760
+action new Sehat
+click 580 692
+type demam; suhu >= 38.5
+key enter
+wait 3
+expect draft demam; suhu >= 38.5
+click 514 297
+wait 3
+expect conclusion Sehat
+action correct
+wait 3
+expect dialog correct
+type Flu
+key enter
+wait 4
+expect dialog none
+expect nodes 2
+expect conclusion Flu
+expect dirty 1
+expect undo 1
+shot corrected
+click 514 409
+wait 3
+expect nodes 1
+expect conclusion Sehat
+expect redo 1
+click 514 453
+wait 3
+expect nodes 2
+expect conclusion Flu
+shot redone

@@ -1,0 +1,85 @@
+{
+  "format": "rdr-kb",
+  "version": 1,
+  "next_id": 8,
+  "root": {
+    "id": 0,
+    "rule": [],
+    "conclusion": "0%",
+    "cornerstone": [],
+    "true": {
+      "id": 1,
+      "rule": ["penghasilan > 60"],
+      "conclusion": "5%",
+      "cornerstone": ["penghasilan > 60"],
+      "true": {
+        "id": 2,
+        "rule": ["penghasilan > 250"],
+        "conclusion": "15%",
+        "cornerstone": ["penghasilan > 250"],
+        "true": {
+          "id": 3,
+          "rule": ["penghasilan > 500"],
+          "conclusion": "25%",
+          "cornerstone": ["penghasilan > 500"],
+          "true": {
+            "id": 4,
+            "rule": ["penghasilan > 5000"],
+            "conclusion": "30%",
+            "cornerstone": ["penghasilan > 5000"],
+            "true": {
+              "id": 5,
+              "rule": ["status = yayasan"],
+              "conclusion": "0%",
+              "cornerstone": ["penghasilan > 5000", "status = yayasan"],
+              "true": null,
+              "false": null
+            },
+            "false": {
+              "id": 7,
+              "rule": ["status = umkm"],
+              "conclusion": "0.5%",
+              "cornerstone": ["penghasilan > 500", "status = umkm"],
+              "true": null,
+              "false": null
+            }
+          },
+          "false": null
+        },
+        "false": {
+          "id": 6,
+          "rule": ["status = umkm"],
+          "conclusion": "0.5%",
+          "cornerstone": ["penghasilan > 60", "status = umkm"],
+          "true": null,
+          "false": null
+        }
+      },
+      "false": null
+    },
+    "false": null
+  },
+  "preferences": {
+    "tree_show_empty_slots": true,
+    "tree_show_node_id": true,
+    "tree_show_cornerstone": false,
+    "tree_highlight": true,
+    "result_show_rule": true,
+    "acquisition_clause_selection": "editable",
+    "acquisition_revision_strategy": "revision_node",
+    "ui_font_size": 16,
+    "ui_theme": "light",
+    "ui_help_language": "id"
+  },
+  "session": {
+    "query_draft": ["penghasilan = 700", "status = umkm"],
+    "last_query": ["penghasilan = 700", "status = umkm"],
+    "last_evaluated": 7,
+    "last_concluded": 7,
+    "view": {
+      "query_tab": "clause",
+      "result_tab": "result",
+      "split": 0.42
+    }
+  }
+}

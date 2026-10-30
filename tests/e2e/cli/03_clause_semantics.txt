@@ -1,0 +1,37 @@
+# E03 Clause semantics: OWA negation, literal, numeric subset, intersection, type isolation
+new Normal
+add-child 0 true demam | Demam
+add-child 1 true !batuk | Demam Tanpa Batuk
+add-child 1 false suhu >= 38.5 | Panas
+add-child 3 false suhu > 37; suhu < 39 | Hangat
+add-child 4 false warna != merah | Bukan Merah
+add-child 5 false suhu = tinggi | Suhu Literal
+tree
+# negation needs an explicit fact (Open World Assumption)
+query demam
+start
+query demam; !batuk
+start
+# numeric rules hold when the fact set is a subset of the rule set
+query suhu = 38.7
+start
+query suhu > 38.5
+start
+query suhu > 38.6; suhu < 38.9
+start
+query suhu = 38
+start
+query suhu <= 40
+start
+# literal inequality uses the single known value
+query warna = biru
+start
+query warna = merah
+start
+query warna != merah
+start
+# clauses of different kinds are never compared
+query suhu = tinggi
+start
+query demam = ya
+start

@@ -1,0 +1,60 @@
+> new Sehat
+[info] New knowledge base with default conclusion 'Sehat'.
+> query demam; suhu = 39
+1. demam
+2. suhu = 39
+> start
+[info] Conclusion: Sehat
+> correct Flu
+[info] Added node #1 (demam AND suhu = 39 >> Flu) as the true child of node #0.
+> pref ui_theme dark
+[info] Preferences updated. Save the project to keep them.
+> pref tree_show_empty_slots false
+[info] Preferences updated. Save the project to keep them.
+> add batuk
+1. demam
+2. suhu = 39
+3. batuk
+> draft
+1. demam
+2. suhu = 39
+3. batuk
+> save build/e2e/tmp/session
+[info] Saved 'session.rdr.json'.
+> status
+RDR Expert System - session.rdr.json | 2 nodes
+[info] Saved 'session.rdr.json'.
+> new Lain
+[info] New knowledge base with default conclusion 'Lain'.
+> open build/e2e/tmp/session.rdr.json
+[info] Opened 'session.rdr.json' (2 nodes).
+> status
+RDR Expert System - session.rdr.json | 2 nodes
+[info] Opened 'session.rdr.json' (2 nodes).
+> draft
+1. demam
+2. suhu = 39
+3. batuk
+> result
+Final conclusion: Flu
+  * Flu   (#1: demam AND suhu = 39)
+    Sehat   (#0: T)
+> tree
+#0 (T >> Sehat)   [fired]
+└─T─ #1 (demam AND suhu = 39 >> Flu)   <== conclusion
+> pref
+tree_show_empty_slots            false
+tree_show_node_id                true
+tree_show_cornerstone            false
+tree_highlight                   true
+result_show_rule                 true
+acquisition_clause_selection     editable
+acquisition_revision_strategy    revision_node
+ui_font_size                     16
+ui_theme                         dark
+ui_help_language                 id
+> save
+[info] Saved 'session.rdr.json'.
+> status
+RDR Expert System - session.rdr.json | 2 nodes
+[info] Saved 'session.rdr.json'.

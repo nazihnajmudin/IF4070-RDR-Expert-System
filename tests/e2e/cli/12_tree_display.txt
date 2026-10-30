@@ -1,0 +1,18 @@
+# E12 Tree display preferences
+new Miskin
+query uang > 100
+start
+correct Butuh Duit
+query uang > 100; budi = kaya
+start
+correct Banyak Duit
+tree
+pref tree_show_empty_slots false
+tree
+pref tree_show_node_id false
+pref tree_show_cornerstone true
+tree
+pref tree_highlight false
+tree
+pref result_show_rule false
+result

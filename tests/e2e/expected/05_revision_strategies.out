@@ -1,0 +1,81 @@
+> new Miskin
+[info] New knowledge base with default conclusion 'Miskin'.
+> query uang > 100
+1. uang > 100
+> start
+[info] Conclusion: Miskin
+> correct Butuh Duit
+[info] Added node #1 (uang > 100 >> Butuh Duit) as the true child of node #0.
+> query uang > 100; budi = kaya; pendiam
+1. uang > 100
+2. budi = kaya
+3. pendiam
+> start
+[info] Conclusion: Butuh Duit
+> correct Banyak Duit
+[info] Added node #2 (budi = kaya AND pendiam >> Banyak Duit) as the true child of node #1.
+> query uang > 100
+1. uang > 100
+> start
+[info] Conclusion: Butuh Duit
+> plan
+Current conclusion: Butuh Duit (node #1)
+Last evaluated node: #2, new node goes to its false slot
+Difference list: (empty, revision case)
+> pref acquisition_revision_strategy reject
+[info] Preferences updated. Save the project to keep them.
+> correct Kaya Raya
+[warning] No clause distinguishes this case from the cornerstone of node #1. Add a distinguishing fact to the query and try again.
+> pref acquisition_revision_strategy edit_conclusion
+[info] Preferences updated. Save the project to keep them.
+> correct Kaya Raya
+[info] No clause distinguishes this case from the cornerstone of node #1. Changed its conclusion to 'Kaya Raya'.
+> tree
+#0 (T >> Miskin)   [fired]
+├─T─ #1 (uang > 100 >> Kaya Raya)   <== conclusion
+│    ├─T─ #2 (budi = kaya AND pendiam >> Banyak Duit)   [failed]
+│    │    ├─T─ ∅
+│    │    └─F─ ∅
+│    └─F─ ∅
+└─F─ ∅
+> undo
+[info] Undid: edit conclusion of node #1.
+> undo
+[info] Undid: change preferences.
+> pref acquisition_revision_strategy revision_node
+[info] Preferences updated. Save the project to keep them.
+> start
+[info] Conclusion: Butuh Duit
+> correct Kaya Raya
+[info] No clause distinguishes this case from the cornerstone of node #1. Added revision node #3 (T >> Kaya Raya) as the false child of node #2.
+> tree
+#0 (T >> Miskin)   [fired]
+├─T─ #1 (uang > 100 >> Butuh Duit)   [fired]
+│    ├─T─ #2 (budi = kaya AND pendiam >> Banyak Duit)   [failed]
+│    │    ├─T─ ∅
+│    │    └─F─ #3 (T >> Kaya Raya) [revises #1]   <== conclusion
+│    │         ├─T─ ∅
+│    │         └─F─ ∅
+│    └─F─ ∅
+└─F─ ∅
+> start
+[info] Conclusion: Kaya Raya
+> result
+Final conclusion: Kaya Raya
+  * Kaya Raya   (#3: T)
+    Butuh Duit   (#1: uang > 100)
+    Miskin   (#0: T)
+> query uang > 100; budi = kaya; pendiam
+1. uang > 100
+2. budi = kaya
+3. pendiam
+> start
+[info] Conclusion: Banyak Duit
+> result
+Final conclusion: Banyak Duit
+  * Banyak Duit   (#2: budi = kaya AND pendiam)
+    Butuh Duit   (#1: uang > 100)
+    Miskin   (#0: T)
+> validate
+[info] Validation passed for 3 node(s) with 1 note(s).
+  - The cornerstone of node #1 is now concluded as 'Kaya Raya' by revision node #3.

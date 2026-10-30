@@ -1,0 +1,41 @@
+# G09 Manual Edit: click an empty slot, fill the form, add the node, then validate
+size 1200 760
+action new Sehat
+action add demam
+action start
+action correct Flu
+key enter
+wait 3
+dclick 520 142
+wait 2
+shortcut escape
+action tab tree
+wait 3
+dclick 700 118
+wait 4
+expect dialog manual
+click 120 161
+wait 3
+click 885 226
+type batuk
+click 885 292
+type Bronkitis
+click 885 358
+type demam; batuk
+wait 2
+shot add_form
+click 757 396
+wait 4
+expect nodes 3
+expect status Added node #2 as the true child of node #1
+shot added
+click 885 480
+wait 3
+expect status Validation passed for 2 node(s)
+click 1113 704
+wait 3
+expect dialog none
+action clear
+action add demam; batuk
+action start
+expect conclusion Bronkitis

@@ -1,0 +1,28 @@
+# E05 Revision case (empty difference list) with the three strategies
+new Miskin
+query uang > 100
+start
+correct Butuh Duit
+query uang > 100; budi = kaya; pendiam
+start
+correct Banyak Duit
+query uang > 100
+start
+plan
+pref acquisition_revision_strategy reject
+correct Kaya Raya
+pref acquisition_revision_strategy edit_conclusion
+correct Kaya Raya
+tree
+undo
+undo
+pref acquisition_revision_strategy revision_node
+start
+correct Kaya Raya
+tree
+start
+result
+query uang > 100; budi = kaya; pendiam
+start
+result
+validate

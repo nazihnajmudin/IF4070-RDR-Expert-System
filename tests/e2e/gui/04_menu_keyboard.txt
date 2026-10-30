@@ -1,0 +1,29 @@
+# G04 Menubar with mouse and keyboard (Alt, arrows, Enter, Escape)
+size 1200 760
+action open examples/diagnosis.rdr.json
+wait 3
+alt e
+expect menu 1
+key down
+key enter
+wait 3
+expect dialog manual
+shortcut escape
+wait 2
+expect dialog none
+click 102 20
+wait 2
+expect menu 1
+move 37 20
+wait 3
+expect menu 0
+shortcut escape
+wait 2
+expect menu -1
+alt h
+key enter
+wait 3
+expect dialog help
+shortcut escape
+wait 2
+expect dialog none

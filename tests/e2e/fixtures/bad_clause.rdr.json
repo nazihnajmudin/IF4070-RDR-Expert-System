@@ -1,0 +1,1 @@
+{"format": "rdr-kb", "version": 1, "root": {"id": 0, "rule": [], "conclusion": "X", "true": {"id": 1, "rule": ["a >"], "conclusion": "Y"}}}

@@ -1,0 +1,20 @@
+# E08 Save and open with session and preference restore
+new Sehat
+query demam; suhu = 39
+start
+correct Flu
+pref ui_theme dark
+pref tree_show_empty_slots false
+add batuk
+draft
+save build/e2e/tmp/session
+status
+new Lain
+open build/e2e/tmp/session.rdr.json
+status
+draft
+result
+tree
+pref
+save
+status

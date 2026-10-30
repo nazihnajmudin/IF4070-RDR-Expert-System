@@ -1,0 +1,24 @@
+# E02 Acquisition: exception placement on true and false slots
+new Sehat
+query demam
+start
+correct Flu
+query demam; batuk
+start
+plan
+correct Bronkitis
+query demam; ruam
+start
+plan
+correct Campak
+query batuk
+start
+plan
+correct Alergi
+tree
+query demam; ruam
+start
+result
+query batuk; pilek
+start
+result

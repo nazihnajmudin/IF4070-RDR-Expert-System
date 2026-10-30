@@ -1,0 +1,11 @@
+case,conclusion
+"demam; suhu >= 38",Flu
+"demam; suhu >= 38; batuk; sesak_napas",Pneumonia
+"demam; suhu >= 38; ruam",Campak
+"demam; suhu >= 38; ruam; nyeri_sendi",Demam Berdarah
+"batuk; !demam",Alergi
+"batuk; !demam; bersin; mata_gatal",Rinitis Alergi
+"sakit_kepala; tekanan_darah >= 140",Hipertensi
+"sakit_kepala; tekanan_darah >= 140; pusing = berat",Hipertensi Berat
+"demam; suhu >= 38; batuk",Flu
+"demam; suhu < 38",Demam Ringan

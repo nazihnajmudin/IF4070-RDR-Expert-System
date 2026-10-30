@@ -1,0 +1,12 @@
+case,conclusion
+"demam; suhu >= 38",Flu
+"demam; suhu >= 38; batuk; sesak_napas",Pneumonia
+"demam; suhu >= 38; ruam",Campak
+"demam; suhu >= 38; batuk",Flu
+"batuk; !demam",Alergi
+"demam; suhu >= 38",Demam Biasa
+"x >",Rusak
+"a; !a",Kontradiksi
+satu_kolom
+"tanpa_kesimpulan",
+"""quoted""",Q

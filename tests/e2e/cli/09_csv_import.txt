@@ -1,0 +1,10 @@
+# E09 Insert CSV with valid, revision, and invalid rows
+new Sehat
+import-csv tests/e2e/fixtures/diagnosis.csv
+tree
+query demam; suhu = 39
+start
+query demam; suhu = 39; ruam
+start
+import-csv tests/e2e/fixtures/no_header.csv
+import-csv tests/e2e/fixtures/missing.csv

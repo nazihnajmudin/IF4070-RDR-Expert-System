@@ -1,0 +1,8 @@
+case,conclusion
+"penghasilan > 60",5%
+"penghasilan > 250",15%
+"penghasilan > 500",25%
+"penghasilan > 5000",30%
+"penghasilan > 5000; status = yayasan",0%
+"penghasilan > 60; status = umkm",0.5%
+"penghasilan > 500; status = umkm",0.5%

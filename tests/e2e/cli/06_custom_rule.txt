@@ -1,0 +1,19 @@
+# E06 Custom exception rules: generalisation, validation, strict mode
+new Normal
+query suhu = 39
+start
+correct Demam
+query suhu = 37.5; lemas
+start
+plan
+correct Subfebris | suhu > 40
+correct Subfebris | lemas; suhu = 39
+correct Subfebris | suhu > 37; suhu < 38
+tree
+query suhu = 37.2
+start
+pref acquisition_clause_selection strict
+query suhu = 37.5; lemas; pucat
+start
+correct Anemia | pucat; suhu < 38
+tree

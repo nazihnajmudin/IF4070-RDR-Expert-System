@@ -1,0 +1,15 @@
+> new Tetap
+[info] New knowledge base with default conclusion 'Tetap'.
+> open build/e2e/tmp/does_not_exist.rdr.json
+[error] Cannot open the project: cannot open 'build/e2e/tmp/does_not_exist.rdr.json': No such file or directory.
+> open tests/e2e/fixtures/malformed.rdr.json
+[error] Cannot open the project: invalid JSON in 'malformed.rdr.json' (line 6, column 5: expected ',' or '}').
+> open tests/e2e/fixtures/not_a_project.json
+[error] Cannot open the project: not an RDR project file ("format" must be "rdr-kb").
+> open tests/e2e/fixtures/bad_clause.rdr.json
+[error] Cannot open the project: node #1: 'rule' Clause 1: 'a >': missing value after '>'.
+> status
+RDR Expert System - Untitled | 1 nodes
+[error] Cannot open the project: node #1: 'rule' Clause 1: 'a >': missing value after '>'.
+> save
+[error] The project has no file yet. Use Save As.

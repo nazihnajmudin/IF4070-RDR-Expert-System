@@ -1,0 +1,54 @@
+> new Miskin
+[info] New knowledge base with default conclusion 'Miskin'.
+> query uang > 100
+1. uang > 100
+> start
+[info] Conclusion: Miskin
+> correct Butuh Duit
+[info] Added node #1 (uang > 100 >> Butuh Duit) as the true child of node #0.
+> query uang > 100; budi = kaya
+1. uang > 100
+2. budi = kaya
+> start
+[info] Conclusion: Butuh Duit
+> correct Banyak Duit
+[info] Added node #2 (budi = kaya >> Banyak Duit) as the true child of node #1.
+> tree
+#0 (T >> Miskin)   [fired]
+├─T─ #1 (uang > 100 >> Butuh Duit)   [fired]
+│    ├─T─ #2 (budi = kaya >> Banyak Duit)   <== conclusion
+│    │    ├─T─ ∅
+│    │    └─F─ ∅
+│    └─F─ ∅
+└─F─ ∅
+> pref tree_show_empty_slots false
+[info] Preferences updated. Save the project to keep them.
+> tree
+#0 (T >> Miskin)   [fired]
+└─T─ #1 (uang > 100 >> Butuh Duit)   [fired]
+     └─T─ #2 (budi = kaya >> Banyak Duit)   <== conclusion
+> pref tree_show_node_id false
+[info] Preferences updated. Save the project to keep them.
+> pref tree_show_cornerstone true
+[info] Preferences updated. Save the project to keep them.
+> tree
+(T >> Miskin)   [fired]
+└─T─ (uang > 100 >> Butuh Duit)   [fired]
+     │ cornerstone: uang > 100
+     └─T─ (budi = kaya >> Banyak Duit)   <== conclusion
+            cornerstone: uang > 100; budi = kaya
+> pref tree_highlight false
+[info] Preferences updated. Save the project to keep them.
+> tree
+(T >> Miskin)
+└─T─ (uang > 100 >> Butuh Duit)
+     │ cornerstone: uang > 100
+     └─T─ (budi = kaya >> Banyak Duit)
+            cornerstone: uang > 100; budi = kaya
+> pref result_show_rule false
+[info] Preferences updated. Save the project to keep them.
+> result
+Final conclusion: Banyak Duit
+  * Banyak Duit
+    Butuh Duit
+    Miskin

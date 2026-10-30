@@ -1,0 +1,16 @@
+# E04 Invalid clauses and contradicting facts are rejected
+new Sehat
+query demam; suhu >; T; 1abc; x = a b; warna > merah; !x = 3
+draft
+start
+query demam; !demam
+start
+query warna = merah; warna = biru
+start
+query x > 5; x < 3
+start
+query warna = merah; warna != merah
+start
+correct Flu
+new
+status

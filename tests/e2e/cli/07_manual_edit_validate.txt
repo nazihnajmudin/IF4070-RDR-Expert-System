@@ -1,0 +1,27 @@
+# E07 Manual editing and knowledge base validation
+new Sehat
+query demam
+start
+correct Flu
+query demam; batuk
+start
+correct Bronkitis
+validate
+rule 0 demam
+rule 2 x >
+rule 2 T; batuk
+conclusion 2
+cornerstone 0 demam
+cornerstone 2 a; !a
+add-child 0 false demam | X
+add-child 0 true demam | X
+add-child 2 false sesak | Asma | demam; sesak
+add-child 99 true a | b
+rule 2 tidak_ada
+validate
+delete 0
+delete 1
+tree
+add-child 0 true T | Selalu
+query apa
+start

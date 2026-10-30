@@ -1,0 +1,28 @@
+# G07 Unsaved changes confirmation before New (Cancel keeps the project, Discard continues)
+size 1200 760
+action new Sehat
+action add demam
+action start
+action correct Flu
+key enter
+wait 3
+expect dirty 1
+shortcut new
+wait 3
+expect dialog unsaved
+click 651 410
+wait 3
+expect dialog none
+expect nodes 2
+shortcut new
+wait 3
+click 747 410
+wait 3
+expect dialog new
+type Baru
+key enter
+wait 3
+expect dialog none
+expect default Baru
+expect nodes 1
+expect dirty 0
