@@ -48,10 +48,44 @@ void gui_reset_view(Gui *gui)
     gui->text_active = 0;
     gui->tree_valid = 0;
     gui->result_valid = 0;
+    gui->reasoning_active = 0;
+    gui->reasoning_step = 0;
+    gui->reasoning_revision = (unsigned long)-1;
     gui_textsel_reset(&gui->result_sel);
     gui_textsel_reset(&gui->tree_sel);
     gui->manual.selected = -1;
     gui->manual.loaded = -1;
+}
+
+void gui_reasoning_start(Gui *gui)
+{
+    gui->reasoning_step = 0;
+    gui->reasoning_revision = gui->app->revision;
+    gui->reasoning_next_time = glfwGetTime();
+    gui->reasoning_active = app_has_result(gui->app);
+    gui->tree_valid = 0;
+}
+
+void gui_reasoning_tick(Gui *gui)
+{
+    double now;
+
+    if (!gui->reasoning_active || gui->reasoning_revision != gui->app->revision ||
+        !app_has_result(gui->app)) {
+        return;
+    }
+    now = glfwGetTime();
+    if (now < gui->reasoning_next_time) {
+        return;
+    }
+    if (gui->reasoning_step < gui->app->inference.step_count) {
+        gui->reasoning_step++;
+        gui->reasoning_next_time = now + 1.0;
+        gui->tree_valid = 0;
+    }
+    if (gui->reasoning_step >= gui->app->inference.step_count) {
+        gui->reasoning_active = 0;
+    }
 }
 
 /* ===================================================================== */

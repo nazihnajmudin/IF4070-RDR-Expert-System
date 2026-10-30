@@ -15,10 +15,12 @@
 #include <string.h>
 
 /* Data font yang di-embed saat build (tools/embed.c) */
-extern const unsigned char font_mono[];
-extern const unsigned long font_mono_size;
-extern const unsigned char font_mono_bold[];
-extern const unsigned long font_mono_bold_size;
+extern const unsigned char font_google_sans[];
+extern const unsigned long font_google_sans_size;
+extern const unsigned char font_google_sans_bold[];
+extern const unsigned long font_google_sans_bold_size;
+extern const unsigned char font_tree[];
+extern const unsigned long font_tree_size;
 
 /* Rentang glyph: Latin, tanda baca umum, panah, operator matematika, box drawing, bentuk, dingbat */
 static const nk_rune FONT_RANGES[] = {
@@ -386,12 +388,14 @@ void gui_backend_update_fonts(Gui *gui, int size)
     cfg.oversample_v = 1;
     cfg_large = cfg;
     cfg_large.size = (float)size * 1.35f;
-    gui->font = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_mono, font_mono_size,
+    gui->font = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_google_sans, font_google_sans_size,
                                               (float)size, &cfg);
-    gui->font_bold = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_mono_bold,
-                                                   font_mono_bold_size, (float)size, &cfg);
-    gui->font_large = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_mono_bold,
-                                                    font_mono_bold_size, cfg_large.size, &cfg_large);
+    gui->font_bold = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_google_sans_bold,
+                                                   font_google_sans_bold_size, (float)size, &cfg);
+    gui->font_large = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_google_sans_bold,
+                                                    font_google_sans_bold_size, cfg_large.size, &cfg_large);
+    gui->font_tree = nk_font_atlas_add_from_memory(&gui->atlas, (void *)font_tree, font_tree_size,
+                                                   (float)size, &cfg);
     image = nk_font_atlas_bake(&gui->atlas, &w, &h, NK_FONT_ATLAS_RGBA32);
 
     /* Texture Upload */

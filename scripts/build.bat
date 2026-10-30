@@ -47,8 +47,9 @@ set GUIFLAGS=-Isrc\gui -Ithird_party\nuklear -Ithird_party\glfw\include -I%GEN%
 rem Embedded Resources
 echo [1/5] Embedding resources
 gcc -std=c99 -O2 -o "%HOST%\embed.exe" tools\embed.c || goto :fail
-"%HOST%\embed.exe" third_party\fonts\DejaVuSansMono.ttf font_mono "%GEN%\font_mono.c" || goto :fail
-"%HOST%\embed.exe" third_party\fonts\DejaVuSansMono-Bold.ttf font_mono_bold "%GEN%\font_mono_bold.c" || goto :fail
+"%HOST%\embed.exe" third_party\fonts\GoogleSans.ttf font_google_sans "%GEN%\font_google_sans.c" || goto :fail
+"%HOST%\embed.exe" third_party\fonts\GoogleSans-Bold.ttf font_google_sans_bold "%GEN%\font_google_sans_bold.c" || goto :fail
+"%HOST%\embed.exe" third_party\fonts\DejaVuSansMono.ttf font_tree "%GEN%\font_tree.c" || goto :fail
 "%HOST%\embed.exe" assets\help\help_id.txt help_text_id "%GEN%\help_text_id.c" || goto :fail
 "%HOST%\embed.exe" assets\help\help_en.txt help_text_en "%GEN%\help_text_en.c" || goto :fail
 

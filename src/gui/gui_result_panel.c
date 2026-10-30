@@ -4,8 +4,7 @@
  *
  * Kedua tab memakai tampilan teks read-only (gui_textview.c) sehingga isinya
  * dapat diseleksi dan disalin. Tab Result menampilkan kesimpulan akhir dan
- * tabel dua kolom berisi kesimpulan dan rule penghasilnya. Kolom tabel
- * disejajarkan dengan spasi karena seluruh font monospace.
+ * tabel dua kolom berisi kesimpulan dan rule penghasilnya.
  */
 
 #include "gui.h"
@@ -207,6 +206,8 @@ struct nk_color gui_tree_line_color(Gui *gui, const RdrLine *line, int *is_concl
 {
     App *app = gui->app;
     RdrNodeStatus st;
+    size_t i;
+    size_t visible_steps = app->inference.step_count;
 
     *is_conclusion = 0;
     if (line->kind != RDR_LINE_NODE) {
@@ -215,11 +216,19 @@ struct nk_color gui_tree_line_color(Gui *gui, const RdrLine *line, int *is_concl
     if (!prefs_get(&app->prefs, PREF_TREE_HIGHLIGHT) || !app_has_result(app)) {
         return gui->pal.text;
     }
-    if (line->node_id == app->inference.last_concluded) {
+    if (gui->reasoning_revision == app->revision) {
+        visible_steps = gui->reasoning_step;
+    }
+    st = RDR_NODE_IDLE;
+    for (i = 0; i < visible_steps; i++) {
+        if (app->inference.steps[i].node_id == line->node_id) {
+            st = app->inference.steps[i].fired ? RDR_NODE_FIRED : RDR_NODE_FAILED;
+        }
+    }
+    if (!gui->reasoning_active && line->node_id == app->inference.last_concluded) {
         *is_conclusion = 1;
         return gui->pal.conclusion;
     }
-    st = rdr_inference_status(&app->inference, line->node_id);
     if (st == RDR_NODE_FIRED) {
         return gui->pal.fired;
     }
@@ -255,6 +264,8 @@ void gui_tree_refresh(Gui *gui)
     /* Colored Document */
     gui_textdoc_clear(&gui->tree_doc);
     st = line_style(gui, gui->pal.muted, GUI_FONT_REGULAR, 0);
+    st.font1 = GUI_FONT_TREE;
+    st.color1 = gui->pal.accent;
     st.height = (float)(int)gui->font->handle.height;
     for (i = 0; i < gui->tree.count; i++) {
         const RdrLine *l = &gui->tree.items[i];

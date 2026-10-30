@@ -84,11 +84,12 @@ CLI_SRC  := $(wildcard src/cli/*.c)
 GLFW_SRC := $(addprefix third_party/glfw/src/,$(GLFW_COMMON) $(GLFW_PLATFORM))
 TEST_SRC := $(wildcard tests/unit/test_*.c)
 
-EMBED_SRC := third_party/fonts/DejaVuSansMono.ttf:font_mono \
-             third_party/fonts/DejaVuSansMono-Bold.ttf:font_mono_bold \
+EMBED_SRC := third_party/fonts/GoogleSans.ttf:font_google_sans \
+             third_party/fonts/GoogleSans-Bold.ttf:font_google_sans_bold \
+             third_party/fonts/DejaVuSansMono.ttf:font_tree \
              assets/help/help_id.txt:help_text_id \
              assets/help/help_en.txt:help_text_en
-EMBED_C   := $(GEN)/font_mono.c $(GEN)/font_mono_bold.c $(GEN)/help_text_id.c $(GEN)/help_text_en.c
+EMBED_C   := $(GEN)/font_google_sans.c $(GEN)/font_google_sans_bold.c $(GEN)/font_tree.c $(GEN)/help_text_id.c $(GEN)/help_text_en.c
 
 CORE_OBJ  := $(CORE_SRC:%.c=$(OUT)/obj/%.o)
 GUI_OBJ   := $(GUI_SRC:%.c=$(OUT)/obj/%.o)

@@ -157,7 +157,8 @@ typedef enum {
 enum {
     GUI_FONT_REGULAR,  /**< Font biasa. */
     GUI_FONT_BOLD,     /**< Font tebal. */
-    GUI_FONT_LARGE     /**< Font tebal besar. */
+    GUI_FONT_LARGE,    /**< Font tebal besar. */
+    GUI_FONT_TREE       /**< Font fallback untuk garis tree. */
 };
 
 /* ===================================================================== */
@@ -167,8 +168,7 @@ enum {
 /**
  * @brief Satu baris tampilan teks dengan paling banyak dua segmen warna.
  *
- * Seluruh font GUI monospace, sehingga kolom karakter dapat dihitung dari
- * lebar satu karakter. Segmen kedua dimulai pada kolom split.
+ * Segmen kedua dimulai pada kolom split.
  */
 typedef struct {
     char *text;              /**< Isi baris UTF-8 (milik baris). */
@@ -298,6 +298,7 @@ typedef struct Gui {
     struct nk_font *font;               /**< Font biasa. */
     struct nk_font *font_bold;          /**< Font tebal. */
     struct nk_font *font_large;         /**< Font tebal besar untuk kesimpulan. */
+    struct nk_font *font_tree;          /**< Font fallback untuk karakter garis tree. */
     int font_size;                      /**< Ukuran font yang sedang terpasang. */
     int theme;                          /**< Tema yang sedang terpasang. */
     GuiPalette pal;                     /**< Warna semantik aktif. */
@@ -369,6 +370,10 @@ typedef struct Gui {
     int tree_valid;                     /**< 1 jika cache sudah pernah dibuat. */
     double tree_click_time;             /**< Waktu klik terakhir pada baris tree. */
     int tree_click_id;                  /**< Node pada klik terakhir. */
+    size_t reasoning_step;              /**< Jumlah langkah reasoning yang sudah ditampilkan. */
+    double reasoning_next_time;         /**< Waktu langkah reasoning berikutnya. */
+    unsigned long reasoning_revision;   /**< Revisi App yang sedang divisualisasikan. */
+    int reasoning_active;               /**< 1 selama replay reasoning berjalan. */
 
     /* Dialogs */
     char new_default[GUI_FIELD_MAX];    /**< Field kesimpulan default pada dialog New. */
@@ -644,6 +649,10 @@ void gui_sync_appearance(Gui *gui);
 
 /** @brief Mengosongkan cache tampilan setelah project diganti. */
 void gui_reset_view(Gui *gui);
+/** @brief Memulai replay langkah reasoning pada tree. */
+void gui_reasoning_start(Gui *gui);
+/** @brief Memajukan replay reasoning berdasarkan timer satu detik. */
+void gui_reasoning_tick(Gui *gui);
 
 /* ===================================================================== */
 /* Dialogs                                                               */

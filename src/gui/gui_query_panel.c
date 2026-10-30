@@ -83,7 +83,12 @@ void gui_query_start(Gui *gui)
         app_draft_add(app, gui->qbar);
         gui->qbar[0] = '\0';
     }
-    app_start(app);
+    if (app_start(app)) {
+        gui_reasoning_start(gui);
+    } else {
+        gui->reasoning_active = 0;
+        gui->tree_valid = 0;
+    }
     if (app->query_tab == SESSION_QUERY_TAB_TEXT) {
         load_text(gui);
     }

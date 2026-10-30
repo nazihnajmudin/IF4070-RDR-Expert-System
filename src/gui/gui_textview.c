@@ -5,8 +5,6 @@
  * Dipakai oleh tab Result dan Tree. Tampilan tidak menyerupai editor (tanpa
  * kursor ketik), tetapi teksnya dapat diseleksi dengan drag mouse atau
  * Shift+klik, diseleksi seluruhnya dengan Ctrl+A, dan disalin dengan Ctrl+C.
- * Seluruh font GUI monospace, sehingga posisi kolom dihitung dari lebar satu
- * karakter.
  */
 
 #include "gui.h"
@@ -82,6 +80,9 @@ const struct nk_user_font *gui_font(Gui *gui, int which)
     }
     if (which == GUI_FONT_LARGE) {
         return &gui->font_large->handle;
+    }
+    if (which == GUI_FONT_TREE) {
+        return &gui->font_tree->handle;
     }
     return &gui->font->handle;
 }

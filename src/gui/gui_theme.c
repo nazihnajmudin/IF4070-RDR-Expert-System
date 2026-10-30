@@ -45,7 +45,7 @@ static void fill_light(struct nk_color *t, GuiPalette *p)
     p->accent = nk_rgb(37, 99, 235);
     p->primary = nk_rgb(37, 99, 235);
     p->fired = nk_rgb(21, 128, 61);
-    p->failed = nk_rgb(194, 65, 12);
+    p->failed = nk_rgb(220, 38, 38);
     p->conclusion = nk_rgb(21, 101, 52);
     p->conclusion_bg = nk_rgb(220, 252, 231);
     p->error = nk_rgb(200, 30, 30);
@@ -98,7 +98,7 @@ static void fill_dark(struct nk_color *t, GuiPalette *p)
     p->accent = nk_rgb(96, 165, 250);
     p->primary = nk_rgb(37, 99, 235);
     p->fired = nk_rgb(74, 222, 128);
-    p->failed = nk_rgb(251, 146, 60);
+    p->failed = nk_rgb(248, 113, 113);
     p->conclusion = nk_rgb(134, 239, 172);
     p->conclusion_bg = nk_rgb(20, 61, 38);
     p->error = nk_rgb(248, 113, 113);

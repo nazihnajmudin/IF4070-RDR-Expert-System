@@ -357,6 +357,7 @@ int main(int argc, char **argv)
         } else {
             gui->idle_frames++;
         }
+        gui_reasoning_tick(gui);
         gui_handle_shortcut(gui);
         main_window(gui);
         gui_menu_popup(gui);
