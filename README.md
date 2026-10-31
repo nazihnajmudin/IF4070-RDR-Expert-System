@@ -4,6 +4,12 @@ Expert system berbasis **binary Single Classification Ripple Down Rules (SCRDR)*
 
 Dibuat untuk tugas mata kuliah IF4070 Representasi Pengetahuan dan Penalaran, Institut Teknologi Bandung.
 
+### Kelompok
+|NIM|Nama|
+|--|-----|
+|13523144|Muhamad Nazih Najmudin|
+|13523158|Lukas Raja Agripa|
+
 ## Fitur Utama
 
 - Engine binary SCRDR buatan sendiri: inferensi, akuisisi exception, kasus revisi dengan tiga strategi, edit manual, dan validasi cornerstone
